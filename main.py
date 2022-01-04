@@ -40,18 +40,19 @@ def train_analyse_algo(ds_name, algo_name, algo_config_dict, out_dir_algo, seed)
     print(
         "Training algo {} on dataset {} with config {} and seed {}".format(algo_name, ds_name, algo_config_dict, seed))
     trainer.train_predict()
-    analyse_from_pkls(results_root=out_dir_algo, thres_methods=thres_methods, eval_root_cause=True, point_adjust=True,
+    analyse_from_pkls(results_root=out_dir_algo, thres_methods=thres_methods, eval_root_cause=False, point_adjust=True,
                       eval_dyn=True, eval_R_model=True, thres_config=get_thres_config,
                       telem_only=True, composite_best_f1=True)
 
 
 def run_all_benchmarks(out_dir_root):
-    multi_seeds = [0, 1, 2, 3, 4]
+    # multi_seeds = [0, 1, 2, 3, 4]
+    multi_seeds = [0]
     # ds_to_run = ["swat", "damadics-s", "wadi", "msl", "smap", "smd", "skab"]
     ds_to_run = ["smd"]
     algos_to_run = [
-                    "RawSignalBaseline",
-                    "PcaRecons",
+                    # "RawSignalBaseline",
+                    # "PcaRecons",
                     "UnivarAutoEncoder_recon_all",
                     "AutoEncoder_recon_all",
                     "LSTM-ED_recon_all",
