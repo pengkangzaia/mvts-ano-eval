@@ -40,23 +40,22 @@ def train_analyse_algo(ds_name, algo_name, algo_config_dict, out_dir_algo, seed)
     print(
         "Training algo {} on dataset {} with config {} and seed {}".format(algo_name, ds_name, algo_config_dict, seed))
     trainer.train_predict()
-    analyse_from_pkls(results_root=out_dir_algo, thres_methods=thres_methods, eval_root_cause=True, point_adjust=False,
+    analyse_from_pkls(results_root=out_dir_algo, thres_methods=thres_methods, eval_root_cause=True, point_adjust=True,
                       eval_dyn=True, eval_R_model=True, thres_config=get_thres_config,
                       telem_only=True, composite_best_f1=True)
 
 
 def run_all_benchmarks(out_dir_root):
     multi_seeds = [0, 1, 2, 3, 4]
-    ds_to_run = ["swat", "damadics-s", "wadi", "msl", "smap", "smd", "skab"]
+    # ds_to_run = ["swat", "damadics-s", "wadi", "msl", "smap", "smd", "skab"]
+    ds_to_run = ["smd"]
     algos_to_run = [
                     "RawSignalBaseline",
                     "PcaRecons",
                     "UnivarAutoEncoder_recon_all",
                     "AutoEncoder_recon_all",
                     "LSTM-ED_recon_all",
-                    "TcnED",
                     "VAE-LSTM",
-                    "MSCRED",
                     "OmniAnoAlgo"
                     ]
     run_multi_seeds(out_dir_root=out_dir_root,
@@ -106,7 +105,7 @@ def run_quick_trial_all_algos(out_dir_root):
 
 if __name__ == "__main__":
     out_dir_root = os.path.join(os.getcwd(), "reports", "trial")
-    run_quick_trial_all_algos(out_dir_root)
+    # run_quick_trial_all_algos(out_dir_root)
     # run_quick_trial_5_ds(out_dir_root)
-    # run_all_benchmarks(out_dir_root)
+    run_all_benchmarks(out_dir_root)
 
